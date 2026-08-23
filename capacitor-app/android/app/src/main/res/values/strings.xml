@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">掼蛋计分</string>
+    <string name="title_activity_main">掼蛋计分</string>
+    <string name="package_name">com.guandan.gdscore.capacitor</string>
+    <string name="custom_url_scheme">com.guandan.gdscore.capacitor</string>
+</resources>

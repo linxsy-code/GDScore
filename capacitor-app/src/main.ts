@@ -96,7 +96,10 @@ function renderHome(): void {
   app.innerHTML = `
     <main class="screen home-screen">
       <header class="home-header">
-        <h1>掼蛋计分</h1>
+        <div class="title-row">
+          <h1>掼蛋计分</h1>
+          <button class="about-button" id="about-button" type="button">关于</button>
+        </div>
         <button class="primary-button" id="start-button" type="button">
           ${state.activeGame ? '继续当前一局' : '开始新的一局'}
         </button>
@@ -107,8 +110,21 @@ function renderHome(): void {
           ${records || '<p class="empty-state">暂无记录</p>'}
         </div>
       </section>
+      <dialog id="about-dialog">
+        <form method="dialog">
+          <h2>关于掼蛋计分</h2>
+          <div class="about-copy">
+            <p>记录红蓝两组的掼蛋级数，支持滑动或按钮计分。</p>
+            <p>可恢复未完成的对局，并查看每局时间、时长和结果。</p>
+            <p class="developer-name">开发者：linxs</p>
+          </div>
+          <button class="primary-button compact" value="close">关闭</button>
+        </form>
+      </dialog>
     </main>`
 
+  const aboutDialog = document.querySelector<HTMLDialogElement>('#about-dialog')
+  document.querySelector('#about-button')?.addEventListener('click', () => aboutDialog?.showModal())
   document.querySelector('#start-button')?.addEventListener('click', () => {
     repository.start()
     navigate({ name: 'scoring' })

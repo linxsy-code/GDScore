@@ -73,11 +73,35 @@ p {
   padding: 38px 22px 26px;
 }
 
-.home-header h1 {
+.title-row {
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.home-header h1 {
+  min-width: 0;
   font-size: clamp(34px, 10vw, 46px);
   line-height: 1.1;
   letter-spacing: -0.04em;
+}
+
+.about-button {
+  min-width: 62px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 15px;
+  color: var(--text);
+  background: var(--surface);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.about-button:active {
+  transform: scale(0.97);
 }
 
 .primary-button,
@@ -375,6 +399,23 @@ dialog h2 {
   margin-bottom: 22px;
   font-size: 21px;
   text-align: center;
+}
+
+.about-copy {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.about-copy p + p {
+  margin-top: 10px;
+}
+
+.about-copy .developer-name {
+  margin-top: 20px;
+  color: var(--text);
+  font-weight: 700;
 }
 
 .dialog-scores {

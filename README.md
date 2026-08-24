@@ -12,4 +12,4 @@
 - GitHub Pages PWA：运行 `npm run build:pwa`
 - 自托管 PWA：运行 `npm run build:selfhost`
 
-自托管版本默认面向 `https://gd.spacy.top:8443/`，Linux/Nginx 配置和部署步骤见 `deploy/README.md`。
+自托管版本默认面向 `https:/xx.xx.xx:8443/`，Linux/Nginx 配置和部署步骤见 `deploy/README.md`。

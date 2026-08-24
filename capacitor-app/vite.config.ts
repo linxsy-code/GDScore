@@ -3,11 +3,23 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig(({ mode }) => {
   const isPagesBuild = mode === 'pages'
+  const isSelfHostedBuild = mode === 'selfhost'
+  const isPwaBuild = isPagesBuild || isSelfHostedBuild
+  const publicSiteUrl = isSelfHostedBuild
+    ? 'https://gd.spacy.top:8443'
+    : 'https://linxsy-code.github.io/GDScore'
 
   return {
     base: isPagesBuild ? '/GDScore/' : '/',
-    plugins: isPagesBuild
-      ? [
+    plugins: [
+      {
+        name: 'inject-public-site-url',
+        transformIndexHtml(html) {
+          return html.replaceAll('__PUBLIC_SITE_URL__', publicSiteUrl)
+        },
+      },
+      ...(isPwaBuild
+        ? [
           VitePWA({
             registerType: 'autoUpdate',
             includeAssets: [
@@ -63,6 +75,7 @@ export default defineConfig(({ mode }) => {
             },
           }),
         ]
-      : [],
+        : []),
+    ],
   }
 })

@@ -5,3 +5,11 @@
 ## 代码路径
 
 - 代码都在子目录capacitor-app下。
+
+## 构建方式
+
+- Android/Capacitor：在 `capacitor-app` 中运行 `npm run build`
+- GitHub Pages PWA：运行 `npm run build:pwa`
+- 自托管 PWA：运行 `npm run build:selfhost`
+
+自托管版本默认面向 `https://gd.spacy.top:8443/`，Linux/Nginx 配置和部署步骤见 `deploy/README.md`。

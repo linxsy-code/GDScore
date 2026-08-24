@@ -1,0 +1,48 @@
+workflows:
+  ios-adhoc:
+    name: GDScore iOS Ad Hoc IPA
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    working_directory: capacitor-app
+
+    environment:
+      node: lts
+      xcode: latest
+      ios_signing:
+        distribution_type: ad_hoc
+        bundle_identifier: com.guandan.gdscore.capacitor
+      vars:
+        XCODE_PROJECT: ios/App/App.xcodeproj
+        XCODE_SCHEME: App
+
+    cache:
+      cache_paths:
+        - $HOME/.npm
+
+    scripts:
+      - name: Install JavaScript dependencies
+        script: npm ci
+
+      - name: Run unit tests
+        script: npm test
+
+      - name: Build web assets
+        script: npm run build
+
+      - name: Sync Capacitor iOS project
+        script: npx cap sync ios
+
+      - name: Configure iOS code signing
+        script: xcode-project use-profiles --project "$XCODE_PROJECT"
+
+      - name: Build signed IPA
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/capacitor-app/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts:
+      - capacitor-app/build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM

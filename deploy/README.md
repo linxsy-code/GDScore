@@ -1,6 +1,6 @@
 # GDScore 自托管部署
 
-目标地址：`https://gd.spacy.top:8443/`
+目标地址：`https://xx.xx.com:8443/`
 
 ## 1. 构建
 
@@ -17,19 +17,19 @@ npm run build:selfhost
 
 确保：
 
-- `gd.spacy.top` 的 DNS 已指向服务器公网 IP；
+- `xx.xx.com` 的 DNS 已指向服务器公网 IP；
 - 防火墙和云安全组已开放 TCP `8443`；
 - Nginx 已安装；
-- 已为 `gd.spacy.top` 取得有效 TLS 证书。
+- 已为 `xx.xx.com` 取得有效 TLS 证书。
 
 仓库中的 Nginx 配置默认使用以下 Let's Encrypt 证书路径：
 
 ```text
-/etc/letsencrypt/live/gd.spacy.top/fullchain.pem
-/etc/letsencrypt/live/gd.spacy.top/privkey.pem
+/etc/letsencrypt/live/xx.xx.com/fullchain.pem
+/etc/letsencrypt/live/xx.xx.com/privkey.pem
 ```
 
-如果证书在其他位置，请修改 `deploy/nginx/gdscore.conf` 中的两个路径。证书与端口无关，同一张 `gd.spacy.top` 证书可以用于 `8443`。如果服务器无法开放 80 端口完成 HTTP 验证，可使用 Certbot 的 DNS 验证方式申请证书。
+如果证书在其他位置，请修改 `deploy/nginx/gdscore.conf` 中的两个路径。证书与端口无关，同一张 `xx.xx.com` 证书可以用于 `8443`。如果服务器无法开放 80 端口完成 HTTP 验证，可使用 Certbot 的 DNS 验证方式申请证书。
 
 ## 3. 上传网站文件
 
@@ -58,12 +58,12 @@ Debian/Ubuntu 如果使用 `sites-available` 目录，也可以放入该目录�
 ## 5. 验证
 
 ```bash
-curl -I https://gd.spacy.top:8443/
-curl -I https://gd.spacy.top:8443/manifest.webmanifest
-curl -I https://gd.spacy.top:8443/sw.js
+curl -I https://xx.xx.com:8443/
+curl -I https://xx.xx.com:8443/manifest.webmanifest
+curl -I https://xx.xx.com:8443/sw.js
 ```
 
-三个地址都应返回 `200`。其中清单应返回 `application/manifest+json`，Service Worker 应返回 JavaScript 类型。部署后的分享图、canonical URL、PWA 启动路径均指向 `https://gd.spacy.top:8443/`。
+三个地址都应返回 `200`。其中清单应返回 `application/manifest+json`，Service Worker 应返回 JavaScript 类型。部署后的分享图、canonical URL、PWA 启动路径均指向 `https://xx.xx.com:8443/`。
 
 ## 后续更新
 
